@@ -1,0 +1,53 @@
+.right-sidebar {
+    flex: 0.25;
+    padding: 20px;
+    background: #192734;
+    border-left: 1px solid #38444d;
+    height: 100vh;
+    position: sticky;
+    top: 0;
+  }
+  
+  .search-bar input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #38444d;
+    border-radius: 25px;
+    background: #15202b;
+    color: white;
+  }
+  
+  .search-bar input::placeholder {
+    color: #8899a6;
+  }
+  
+  .followers {
+    margin-top: 20px;
+  }
+  
+  .followers h3 {
+    margin: 0;
+    margin-bottom: 10px;
+    font-size: 18px;
+    color: #ffffff;
+  }
+  
+  .follower {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  .follower-avatar {
+    width: 40px;
+    height: 40px;
+    background: #8899a6;
+    border-radius: 50%;
+    margin-right: 10px;
+  }
+  
+  .follower-name {
+    color: white;
+    font-size: 16px;
+  }
+  

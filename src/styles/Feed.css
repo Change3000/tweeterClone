@@ -1,0 +1,18 @@
+.feed {
+  flex: 0.5;
+  border-right: 1px solid #38444d;
+  overflow-y: auto;
+  height: 100vh;
+  padding-bottom: 50px;
+}
+
+.feed-header {
+  position: sticky;
+  top: 0;
+  background: #15202b;
+  z-index: 100;
+  padding: 20px;
+  font-size: 20px;
+  font-weight: bold;
+  border-bottom: 1px solid #38444d;
+}
