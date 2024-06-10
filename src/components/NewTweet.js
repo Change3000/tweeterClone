@@ -1,5 +1,5 @@
 import { useState } from 'react';
-//import { createTweet } from '../api/requests/requests';
+import { createTweet } from '../api/requests/requests';
 import image from '../assets/image.svg';
 import gif from '../assets/gif.svg';
 import poll from '../assets/poll.svg';
