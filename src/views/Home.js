@@ -4,6 +4,7 @@ import Hashtags from '../components/suggestions/Hashtags';
 import SearchComp from '../components/suggestions/Search';
 import UsersBox from '../components/suggestions/UsersBox';
 import Tweet from '../components/Tweet';
+import CreateTweet from '../components/createTweet';
 import Loading from '../components/Loading';
 
 function App() {
@@ -39,7 +40,7 @@ function App() {
                             </div>
                         </div>
 
-                        {/* Removed CreateTweet component */}
+                        {<CreateTweet refresh={refresh} />}
 
                         <div className='w-full flex flex-col min-h-screen'>
                             {loading ? (
