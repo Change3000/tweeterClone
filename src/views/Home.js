@@ -1,83 +1,67 @@
-import React from 'react';
-import '../styles/Navbar.css';
+import React, { useEffect, useState } from 'react';
+import shine from '../assets/shine.svg';
+import Hashtags from '../components/suggestions/Hashtags';
+import SearchComp from '../components/suggestions/Search';
+import UsersBox from '../components/suggestions/UsersBox';
+import Tweet from '../components/Tweet';
+import Loading from '../components/Loading';
 
-import logo from '../assets/logo.png';
-import HomeLogo from '../assets/home.svg';
-import HashLogo from '../assets/hashtag.svg';
-import NotificationLogo from '../assets/notification.svg';
-import DMlogo from '../assets/message.svg';
-import Bookmark from '../assets/bookmark.svg';
-import List from '../assets/dropdown.svg';
-import Profile from '../assets/me.jpg';
-import More from '../assets/more.svg';
-import Default from '../assets/default.png';
+function App() {
+    const [tweets, setTweets] = useState([]);
+    const [loading, setLoading] = useState(true);
 
-function Navbar() {
-    const user = {
-        token: true, // Simulate user authentication
-        username: 'exampleUser',
-        name: 'Example User',
-        photo: null // Simulate user profile photo
+    const refresh = () => {
+        // Simulating fetching data
+        setTimeout(() => {
+            const mockData = [
+                { user: 'user1', content: 'Tweet 1', date: '2024-06-10' },
+                { user: 'user2', content: 'Tweet 2', date: '2024-06-09' },
+                { user: 'user3', content: 'Tweet 3', date: '2024-06-08' },
+            ];
+            setTweets(mockData);
+            setLoading(false);
+        }, 1000);
     };
 
-    const location = window.location.pathname;
-    const blockRenderPaths = [
-        "/login",
-        "/register"
-    ];
-
-    if (!user.token || blockRenderPaths.includes(location)) return null;
+    useEffect(() => {
+        refresh();
+    }, []);
 
     return (
-        <header className='header'>
-            <div className="sidebar">
-                <img src={logo} width='30' className='logo' alt="" />
-                <a href="/home" className="nav-link">
-                    <img src={HomeLogo} width="30" alt="" />
-                    <span>Home</span>
-                </a>
-                <a href="#" className="nav-link">
-                    <img src={HashLogo} width="30" alt="" />
-                    <span>Keşfet</span>
-                </a>
-                <a href="#" className="nav-link">
-                    <img src={NotificationLogo} width="30" alt="" />
-                    <span>Bildirimler</span>
-                </a>
-                <a href="#" className="nav-link">
-                    <img src={DMlogo} width="30" alt="" />
-                    <span>Mesajlar</span>
-                </a>
-                <a href="#" className="nav-link">
-                    <img src={Bookmark} width="30" alt="" />
-                    <span>Yer İşaretleri</span>
-                </a>
-                <a href="#" className="nav-link">
-                    <img src={List} width="30" alt="" />
-                    <span>Listeler</span>
-                </a>
-                <a href={`/${user.username}`} className="nav-link">
-                    <img src={Profile} width="30" alt="" />
-                    <span>Profil</span>
-                </a>
-                <a href="#" className="nav-link">
-                    <img src={More} width="30" alt="" />
-                    <span>Daha fazla</span>
-                </a>
-                <a href='#' className='tweet-button'>
-                    <span>Tweetle</span>
-                </a>
-                <div className='user-info'>
-                    <img src={user.photo ? user.photo : Default} width="40" className='user-avatar' alt="" />
-                    <div className='user-details'>
-                        <span className='user-name'>{user.name}</span>
-                        <span className='user-username'>@{user.username}</span>
+        <main className='w-full flex items-start'>
+            <div className='min-w-full md:w-[990px] md:min-w-max relative'>
+                <div className='w-full flex items-end justify-end gap-10'>
+                    <div id='tweets' className='border-l md:w-[592px] w-full border-l-gray-500 border-r border-r-gray-500 border-opacity-50 self-start flex flex-col items-center'>
+                        <div id='topbar' className='w-full relative h-[53px] flex items-center justify-center z-30'>
+                            <div className='flex items-center justify-between h-[53px] fixed w-[85%] md:w-[31%] px-4' style={{ backdropFilter: 'blur(12px)', backgroundColor: 'rgba(0, 0, 0, 0.65)' }}>
+                                <span className='font-bold text-xl'>Home</span>
+                                <img src={shine} width='30' alt='' />
+                            </div>
+                        </div>
+
+                        {/* Removed CreateTweet component */}
+
+                        <div className='w-full flex flex-col min-h-screen'>
+                            {loading ? (
+                                <Loading />
+                            ) : (
+                                tweets.map((tweet, index) => {
+                                    return <Tweet key={index} id={tweet.user} content={tweet.content} date={tweet.date} />;
+                                })
+                            )}
+                        </div>
                     </div>
-                    <img src={More} width="20" className='more-icon' alt="" />
+
+                    <div id='tags' className='!w-[350px] !min-w-[350px] hidden md:flex flex-col mr-[10px] gap-4 self-start'>
+                        <SearchComp />
+                        <div className='w-full !h-11 mb-2'></div>
+                        <Hashtags />
+                        <UsersBox title='Who to follow' />
+                    </div>
                 </div>
             </div>
-        </header>
+        </main>
     );
 }
 
-export default Navbar;
+export default App;
